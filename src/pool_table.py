@@ -7,7 +7,7 @@ import numpy as np
 
 def main():
 
-    im = cv2.imread('../pool table.jpg', 0)
+    im = cv2.imread('../images/1/pool table.jpg', 0)
     im_med5 = cv2.medianBlur(im,5)
     # im_med5 = cv2.GaussianBlur(im, (5,5), 0)
 
@@ -28,6 +28,10 @@ def main():
 
     # dst = cv2.addWeighted(abs_grad_x, 0.5, abs_grad_y, 0.5, 0)
     dst = cv2.add(abs_grad_x,abs_grad_y)
+
+    dst = cv2.GaussianBlur(dst, (9,9), 0, dst)
+    p3 = plt.figure(3)
+    plt.imshow(dst)
 
     im_can = cv2.Canny(dst, 50, 150, True)
     minLineLength = 1
@@ -56,7 +60,7 @@ def main():
     # for x1, y1, x2, y2 in lines[0]:
     #     cv2.line(im, (x1, y1), (x2, y2), (0, 255, 0), 2)
 
-    cv2.imwrite('houghlines5.jpg', im)
+    cv2.imwrite('../images/1/houghlines5.jpg', im)
 
     # im_med5 = cv2.medianBlur(im, 9)
     # im_can = cv2.Sobel(im)
